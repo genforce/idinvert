@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- === Header Starts === -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>IDInvert</title>
+
+  <link href="./assets/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/font.css" rel="stylesheet" type="text/css">
+  <link href="./assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<!-- === Header Ends === -->
+
+
+<body>
+
+
+<!-- === Home Section Starts === -->
+<div class="container">
+  <div class="title" style="margin: 20pt 50pt;">
+    In-Domain GAN Inversion for Real Image Editing
+  </div>
+  <div class="author">
+    <a href="https://zhujiapeng.github.io/" target="_blank">Jiapeng Zhu,</a><sup>1*</sup>
+    <a href="http://shenyujun.github.io/" target="_blank">Yujun Shen,</a><sup>1*</sup>
+    <a href="https://sites.google.com/site/zhaodeli" target="_blank">Deli Zhao,</a><sup>2</sup>&nbsp;
+    <a href="http://bzhou.ie.cuhk.edu.hk" target="_blank">Bolei Zhou</a><sup>1</sup>&nbsp;
+  </div>
+  <div class="institution">
+    <sup>1</sup>The Chinese University of Hong Kong &nbsp; &nbsp; &nbsp; &nbsp;
+    <sup>2</sup>Xiaomi AI Lab
+  </div>
+  <div class="link">
+    <a href="https://arxiv.org/pdf/2004.00049.pdf" target="_blank">[Paper]</a>&nbsp;
+    <a href="https://github.com/genforce/idinvert" target="_blank">[Code]</a>
+  </div>
+  <div class="teaser">
+    <img src="./assets/teaser.jpg">
+  </div>
+</div>
+<!-- === Home Section Ends === -->
+
+
+<!--====== Overview Section Starts ======-->
+<div class="container">
+  <div class="title">Overview</div>
+  <div class="body">
+    In this work, we argue that the GAN inversion task is required
+    not only to reconstruct the target image by pixel values,
+    but also to keep the inverted code in the <i>semantic domain</i> of the original latent space of well-trained GANs. For this purpose, we propose In-Domain GAN inversion (IDInvert) by
+    first training a novel <i>domain-guided</i> encoder which is able to produce in-domain latent code,
+    and then performing <i>domain-regularized</i> optimization which involves the encoder as a regularizer to land the
+    code inside the latent space when being finetuned.
+    The in-domain codes produced by IDInvert enable high-quality real image editing with fixed GAN models.
+  </div>
+</div>
+<!--====== Overview Section Ends ======-->
+
+
+<!--====== Results Section Starts ======-->
+<div class="container">
+  <div class="title">Results</div>
+  <div class="body">
+    Image editing results.
+
+    <table width="100%" style="margin: 20pt auto; text-align: center;">
+      <tr>
+        <td><img src="./assets/teaser_video.gif" width="90%"></td>
+      </tr>
+    </table>
+
+    Check more results in the following video.
+
+    <!-- Adjust the frame size based on the demo (Every project differs). -->
+    <div style="position: relative; padding-top: 50%; margin: 20pt auto; text-align: center;">
+      <iframe src="https://www.youtube.com/embed/3v6NHrhuyFY" frameborder=0
+              style="position: absolute; top: 2.5%; left: 2.5%; width: 95%; height: 100%;"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+<!--====== Results Section Ends ======-->
+
+
+<!--====== References Section Starts ======-->
+<div class="container">
+  <div class="bibtex">Bibtex</div>
+<pre>
+@article{zhu2020indomain,
+  title   = {In-domain GAN Inversion for Real Image Editing},
+  author  = {Zhu, Jiapeng and Shen, Yujun and Zhao, Deli and Zhou, Bolei},
+  journal = {arXiv preprint arXiv:2004.00049},
+  year    = {2020}
+}
+</pre>
+
+<!--====== References Section Starts ======-->
+<!-- BZ: we should give other related work enough credits, -->
+<!--     so please include some most relevant work and leave some comment to summarize work and the difference -->
+  <div class="ref">Related Work</div>
+  <div class="citation">
+    <img src="./assets/interfacegan.jpg">
+    <a href="https://genforce.github.io/interfacegan/">
+      Y. Shen, J. Gu, X. Tang, B. Zhou.
+      Interpreting Latent Space of GANs for Semantic Face Editing.
+      CVPR 2020.
+    </a>
+    <br>
+    <b>Comment:</b> Proposes a technique for semantic face editing in latent space.
+  </div>
+  <div class="citation">
+    <img src="./assets/higan.jpg">
+    <a href="https://genforce.github.io/higan/">
+      C. Yang, Y. Shen, B. Zhou.
+      Semantic Hierarchy Emerges in Deep Generative Representations for Scene Synthesis.
+      arXiv preprint arXiv:1911.09267, 2019
+    </a>
+    <br>
+    <b>Comment:</b> Explores the emergent semantic hierarchy in scene synthesis models.
+  </div>
+  <div class="citation">
+    <img src="./assets/image2stylegan.jpg">
+    <a href="https://arxiv.org/abs/1904.03189">
+      R. Abdal, Y. Qin, P. Wonka
+      Image2StyleGAN: How to Embed Images Into the StyleGAN Latent Space?
+      ICCV 2019.
+    </a>
+    <br>
+    <b>Comment:</b> Explores how to Embed Images into the latent space.
+  </div>
+  <div class="citation">
+    <img src="./assets/pix2pix.jpg">
+    <a href="https://phillipi.github.io/pix2pix/">
+      P. Isola, J.Y. Zhu, T. Zhou, A. A. Efros.
+      Image-to-Image Translation with Conditional Adversarial Nets.
+      CVPR 2017.
+    </a>
+    <br>
+    <b>Comment:</b> Investigates image-to-image translation using conditional GANs.
+  </div>
+  <div class="citation">
+    <img src="./assets/igan.jpg">
+    <a href="http://efrosgans.eecs.berkeley.edu/iGAN/">
+      J.Y. Zhu, P. Krähenbühl, E. Shechtman, A. A. Efros.
+      Generative Visual Manipulation on the Natural Image Manifold.
+      ECCV 2016.
+    </a>
+    <br>
+    <b>Comment:</b> Proposes a method that could conduct realistic photo manipulation and
+      a system for interactive drawing using a GAN.
+  </div>
+  <div class="citation">
+    <img src="./assets/mganprior.jpg">
+    <a href="https://genforce.github.io/mganprior/">
+      J. Gu, Y. Shen, B. Zhou.
+      Image Processing Using Multi-Code GAN Prior.
+      CVPR 2020.
+    </a>
+    <br>
+    <b>Comment:</b> Employs multiple latent codes to invert a GAN model as prior for real image processing.
+  </div>
+
+</div>
+<!--====== References Section Ends ======-->
+
+
+</body>
+</html>
