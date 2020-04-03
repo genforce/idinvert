@@ -37,8 +37,8 @@ def parse_args():
                       help='Batch size. (default: 4)')
   parser.add_argument('--learning_rate', type=float, default=0.01,
                       help='Learning rate for optimization. (default: 0.01)')
-  parser.add_argument('--num_iterations', type=int, default=500,
-                      help='Number of optimization iterations. (default: 500)')
+  parser.add_argument('--num_iterations', type=int, default=100,
+                      help='Number of optimization iterations. (default: 100)')
   parser.add_argument('--num_results', type=int, default=5,
                       help='Number of intermediate optimization results to '
                            'save for each sample. (default: 5)')
