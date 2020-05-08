@@ -19,14 +19,21 @@
 
 
 <!-- === Home Section Starts === -->
-<div class="container">
-  <div class="title" style="margin: 20pt 50pt;">
-    In-Domain GAN Inversion for Real Image Editing
+<div class="section">
+  <!-- === Title Starts === -->
+  <div class="header">
+    <div class="logo">
+      <a href="https://genforce.github.io/" target="_blank"><img src="./assets/genforce.png"></a>
+    </div>
+    <div class="title", style="padding-top: 25pt;">
+      In-Domain GAN Inversion for Real Image Editing
+    </div>
   </div>
+  <!-- === Title Ends === -->
   <div class="author">
-    <a href="https://zhujiapeng.github.io/" target="_blank">Jiapeng Zhu,</a><sup>1*</sup>
-    <a href="http://shenyujun.github.io/" target="_blank">Yujun Shen,</a><sup>1*</sup>
-    <a href="https://sites.google.com/site/zhaodeli" target="_blank">Deli Zhao,</a><sup>2</sup>&nbsp;
+    <a href="https://zhujiapeng.github.io/" target="_blank">Jiapeng Zhu</a><sup>1*</sup>,&nbsp;
+    <a href="http://shenyujun.github.io/" target="_blank">Yujun Shen</a><sup>1*</sup>,&nbsp;
+    <a href="https://sites.google.com/site/zhaodeli" target="_blank">Deli Zhao</a><sup>2</sup>,&nbsp;
     <a href="http://bzhou.ie.cuhk.edu.hk" target="_blank">Bolei Zhou</a><sup>1</sup>&nbsp;
   </div>
   <div class="institution">
@@ -44,8 +51,8 @@
 <!-- === Home Section Ends === -->
 
 
-<!--====== Overview Section Starts ======-->
-<div class="container">
+<!-- === Overview Section Starts === -->
+<div class="section">
   <div class="title">Overview</div>
   <div class="body">
     In this work, we argue that the GAN inversion task is required
@@ -57,11 +64,11 @@
     The in-domain codes produced by IDInvert enable high-quality real image editing with fixed GAN models.
   </div>
 </div>
-<!--====== Overview Section Ends ======-->
+<!-- === Overview Section Ends === -->
 
 
-<!--====== Results Section Starts ======-->
-<div class="container">
+<!-- === Result Section Starts === -->
+<div class="section">
   <div class="title">Results</div>
   <div class="body">
     Image editing results.
@@ -83,12 +90,12 @@
     </div>
   </div>
 </div>
-<!--====== Results Section Ends ======-->
+<!-- === Result Section Ends === -->
 
 
-<!--====== References Section Starts ======-->
-<div class="container">
-  <div class="bibtex">Bibtex</div>
+<!-- === Reference Section Starts === -->
+<div class="section">
+  <div class="bibtex">BibTeX</div>
 <pre>
 @article{zhu2020indomain,
   title   = {In-domain GAN Inversion for Real Image Editing},
@@ -98,74 +105,75 @@
 }
 </pre>
 
-<!--====== References Section Starts ======-->
-<!-- BZ: we should give other related work enough credits, -->
-<!--     so please include some most relevant work and leave some comment to summarize work and the difference -->
   <div class="ref">Related Work</div>
   <div class="citation">
-    <img src="./assets/interfacegan.jpg">
-    <a href="https://genforce.github.io/interfacegan/">
-      Y. Shen, J. Gu, X. Tang, B. Zhou.
-      Interpreting Latent Space of GANs for Semantic Face Editing.
-      CVPR 2020.
-    </a>
-    <br>
-    <b>Comment:</b> Proposes a technique for semantic face editing in latent space.
+    <div class="image"><img src="./assets/interfacegan.jpg"></div>
+    <div class="comment">
+      <a href="https://genforce.github.io/interfacegan/" target="_blank">
+        Y. Shen, J. Gu, X. Tang, B. Zhou.
+        Interpreting Latent Space of GANs for Semantic Face Editing.
+        CVPR 2020.</a><br>
+      <b>Comment:</b>
+      Proposes a technique for semantic face editing in latent space.
+    </div>
   </div>
   <div class="citation">
-    <img src="./assets/higan.jpg">
-    <a href="https://genforce.github.io/higan/">
-      C. Yang, Y. Shen, B. Zhou.
-      Semantic Hierarchy Emerges in Deep Generative Representations for Scene Synthesis.
-      arXiv preprint arXiv:1911.09267, 2019
-    </a>
-    <br>
-    <b>Comment:</b> Explores the emergent semantic hierarchy in scene synthesis models.
+    <div class="image"><img src="./assets/higan.jpg"></div>
+    <div class="comment">
+      <a href="https://genforce.github.io/higan/" target="_blank">
+        C. Yang, Y. Shen, B. Zhou.
+        Semantic Hierarchy Emerges in Deep Generative Representations for Scene Synthesis.
+        arXiv preprint arXiv:1911.09267, 2019</a><br>
+      <b>Comment:</b>
+      Explores the emergent semantic hierarchy in scene synthesis models.
+    </div>
   </div>
   <div class="citation">
-    <img src="./assets/image2stylegan.jpg">
-    <a href="https://arxiv.org/abs/1904.03189">
-      R. Abdal, Y. Qin, P. Wonka
-      Image2StyleGAN: How to Embed Images Into the StyleGAN Latent Space?
-      ICCV 2019.
-    </a>
-    <br>
-    <b>Comment:</b> Explores how to Embed Images into the latent space.
+    <div class="image"><img src="./assets/image2stylegan.jpg"></div>
+    <div class="comment">
+      <a href="https://arxiv.org/abs/1904.03189" target="_blank">
+        R. Abdal, Y. Qin, P. Wonka
+        Image2StyleGAN: How to Embed Images Into the StyleGAN Latent Space?
+        ICCV 2019.</a><br>
+      <b>Comment:</b>
+      Explores how to Embed Images into the latent space.
+    </div>
   </div>
   <div class="citation">
-    <img src="./assets/pix2pix.jpg">
-    <a href="https://phillipi.github.io/pix2pix/">
-      P. Isola, J.Y. Zhu, T. Zhou, A. A. Efros.
-      Image-to-Image Translation with Conditional Adversarial Nets.
-      CVPR 2017.
-    </a>
-    <br>
-    <b>Comment:</b> Investigates image-to-image translation using conditional GANs.
+    <div class="image"><img src="./assets/pix2pix.jpg"></div>
+    <div class="comment">
+      <a href="https://phillipi.github.io/pix2pix/" target="_blank">
+        P. Isola, J.Y. Zhu, T. Zhou, A. A. Efros.
+        Image-to-Image Translation with Conditional Adversarial Nets.
+        CVPR 2017.</a><br>
+      <b>Comment:</b>
+      Investigates image-to-image translation using conditional GANs.
+    </div>
   </div>
   <div class="citation">
-    <img src="./assets/igan.jpg">
-    <a href="http://efrosgans.eecs.berkeley.edu/iGAN/">
-      J.Y. Zhu, P. Krähenbühl, E. Shechtman, A. A. Efros.
-      Generative Visual Manipulation on the Natural Image Manifold.
-      ECCV 2016.
-    </a>
-    <br>
-    <b>Comment:</b> Proposes a method that could conduct realistic photo manipulation and
-      a system for interactive drawing using a GAN.
+    <div class="image"><img src="./assets/igan.jpg"></div>
+    <div class="comment">
+      <a href="http://efrosgans.eecs.berkeley.edu/iGAN/" target="_blank">
+        J.Y. Zhu, P. Krähenbühl, E. Shechtman, A. A. Efros.
+        Generative Visual Manipulation on the Natural Image Manifold.
+        ECCV 2016.</a><br>
+      <b>Comment:</b>
+      Proposes a method for realistic photo manipulation and a system for interactive drawing using GANs.
+    </div>
   </div>
   <div class="citation">
-    <img src="./assets/mganprior.jpg">
-    <a href="https://genforce.github.io/mganprior/">
-      J. Gu, Y. Shen, B. Zhou.
-      Image Processing Using Multi-Code GAN Prior.
-      CVPR 2020.
-    </a>
-    <br>
-    <b>Comment:</b> Employs multiple latent codes to invert a GAN model as prior for real image processing.
+    <div class="image"><img src="./assets/mganprior.jpg"></div>
+    <div class="comment">
+      <a href="https://genforce.github.io/mganprior/" target="_blank">
+        J. Gu, Y. Shen, B. Zhou.
+        Image Processing Using Multi-Code GAN Prior.
+        CVPR 2020.</a><br>
+      <b>Comment:</b>
+      Employs multiple latent codes to invert a GAN model as prior for real image processing.
+    </div>
   </div>
-
 </div>
-<!--====== References Section Ends ======-->
+<!-- === Reference Section Ends === -->
 
 
 </body>
