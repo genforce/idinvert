@@ -36,8 +36,8 @@ MODEL_PATH='styleganinv_face_256.pkl'
 IMAGE_LIST='examples/test.list'
 python invert.py $MODEL_PATH $IMAGE_LIST
 ```
-NOTE: We find that 100 iterations are good enough for inverting an image, which takes about 8s (on P40). But users can always use more iterations (much slower) for a more precise reconstruction. 
 
+NOTE: We find that 100 iterations are good enough for inverting an image, which takes about 8s (on P40). But users can always use more iterations (much slower) for a more precise reconstruction.
 
 ### Interpolation
 
