@@ -13,7 +13,7 @@ In the repository, we propose an in-domain GAN inversion method, which not only 
 1. Training **domain-guided** encoder.
 2. Performing **domain-regularized** optimization.
 
-[[Paper](https://arxiv.org/pdf/2004.00049.pdf)]
+[[Paper](https://genforce.github.io/idinvert/IDInvert.pdf)]
 [[Project Page](https://genforce.github.io/idinvert/)]
 [[Demo](https://www.youtube.com/watch?v=3v6NHrhuyFY)]
 
