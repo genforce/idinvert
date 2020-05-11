@@ -51,9 +51,6 @@ def parse_args():
   parser.add_argument('--loss_weight_feat', type=float, default=5e-5,
                       help='The perceptual loss scale for optimization. '
                            '(default: 5e-5)')
-  parser.add_argument('--loss_weight_pix', type=float, default=1.0,
-                      help='The pixel loss scale for optimization. '
-                           '(default: 1.0)')
   parser.add_argument('--loss_weight_enc', type=float, default=2.0,
                       help='The encoder loss scale for optimization.'
                            '(default: 2.0)')
@@ -68,8 +65,7 @@ def main():
   """Main function."""
   args = parse_args()
   os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
-  assert os.path.exists(args.model_path), f'Model `{args.model_path}` missing!'
-  assert os.path.exists(args.image_list), f'List `{args.image_list}` missing!'
+  assert os.path.exists(args.image_list)
   image_list_name = os.path.splitext(os.path.basename(args.image_list))[0]
   output_dir = args.output_dir or f'results/inversion/{image_list_name}'
   logger = setup_logger(output_dir, 'inversion.log', 'inversion_logger')
@@ -120,8 +116,8 @@ def main():
   else:
     logger.info(f'  Do NOT involve encoder for optimization.')
     loss_enc = 0
-  loss = (args.loss_weight_feat * loss_feat +
-          args.loss_weight_pix * loss_pix +
+  loss = (loss_pix +
+          args.loss_weight_feat * loss_feat +
           args.loss_weight_enc * loss_enc)
   optimizer = tf.train.AdamOptimizer(learning_rate=args.learning_rate)
   train_op = optimizer.minimize(loss, var_list=[wp])
@@ -142,9 +138,9 @@ def main():
     if step == args.num_iterations or step % save_interval == 0:
       headers.append(f'Step {step:06d}')
   viz_size = None if args.viz_size == 0 else args.viz_size
-  visualier = HtmlPageVisualizer(
+  visualizer = HtmlPageVisualizer(
       num_rows=len(image_list), num_cols=len(headers), viz_size=viz_size)
-  visualier.set_headers(headers)
+  visualizer.set_headers(headers)
 
   images = np.zeros(input_shape, np.uint8)
   names = ['' for _ in range(args.batch_size)]
@@ -167,23 +163,22 @@ def main():
       image = np.transpose(images[i], [1, 2, 0])
       save_image(f'{output_dir}/{names[i]}_ori.png', image)
       save_image(f'{output_dir}/{names[i]}_enc.png', outputs[1][i])
-      visualier.set_cell(i + img_idx, 0, text=names[i])
-      visualier.set_cell(i + img_idx, 1, image=image)
-      visualier.set_cell(i + img_idx, 2, image=outputs[1][i])
+      visualizer.set_cell(i + img_idx, 0, text=names[i])
+      visualizer.set_cell(i + img_idx, 1, image=image)
+      visualizer.set_cell(i + img_idx, 2, image=outputs[1][i])
     # Optimize latent codes.
     col_idx = 3
     for step in tqdm(range(1, args.num_iterations + 1), leave=False):
       sess.run(train_op, {x: inputs})
       if step == args.num_iterations or step % save_interval == 0:
         outputs = sess.run([wp, x_rec])
-        if step == args.num_iterations:
-          latent_codes.append(outputs[0][0:len(batch)])
         outputs[1] = adjust_pixel_range(outputs[1])
         for i, _ in enumerate(batch):
           if step == args.num_iterations:
             save_image(f'{output_dir}/{names[i]}_inv.png', outputs[1][i])
-          visualier.set_cell(i + img_idx, col_idx, image=outputs[1][i])
+          visualizer.set_cell(i + img_idx, col_idx, image=outputs[1][i])
         col_idx += 1
+    latent_codes.append(outputs[0][0:len(batch)])
 
   # Save results.
   os.system(f'cp {args.image_list} {output_dir}/image_list.txt')
@@ -191,7 +186,7 @@ def main():
           np.concatenate(latent_codes_enc, axis=0))
   np.save(f'{output_dir}/inverted_codes.npy',
           np.concatenate(latent_codes, axis=0))
-  visualier.save(f'{output_dir}/inversion.html')
+  visualizer.save(f'{output_dir}/inversion.html')
 
 
 if __name__ == '__main__':
