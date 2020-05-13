@@ -100,7 +100,7 @@ Modify `train_encoder.py` as follows:
 - Add training and test dataset path to `Data_dir` in `train_encoder.py`.
 - Add generator path to `Decoder_pkl` in `train_encoder.py`.
 
-### Step:3 Train your own encoder
+### Step-3: Train your own encoder
 
 ```bash
 python train_encoder.py
