@@ -112,7 +112,7 @@ python train_encoder.py
 @inproceedings{zhu2020indomain,
   title     = {In-domain GAN Inversion for Real Image Editing},
   author    = {Zhu, Jiapeng and Shen, Yujun and Zhao, Deli and Zhou, Bolei},
-  booktitle = {Proceedings of European Conference on Computer Vision (ECCV)},,
+  booktitle = {Proceedings of European Conference on Computer Vision (ECCV)},
   year      = {2020}
 }
 ```
