@@ -109,10 +109,10 @@ python train_encoder.py
 ## Bibtex
 
 ```bibtex
-@article{zhu2020indomain,
-  title   = {In-domain GAN Inversion for Real Image Editing},
-  author  = {Zhu, Jiapeng and Shen, Yujun and Zhao, Deli and Zhou, Bolei},
-  journal = {arXiv preprint arXiv:2004.00049},
-  year    = {2020}
+@inproceedings{zhu2020indomain,
+  title     = {In-domain GAN Inversion for Real Image Editing},
+  author    = {Zhu, Jiapeng and Shen, Yujun and Zhao, Deli and Zhou, Bolei},
+  booktitle = {Proceedings of European Conference on Computer Vision (ECCV)},,
+  year      = {2020}
 }
 ```
