@@ -8,6 +8,10 @@
 
 **Figure:** *Real image editing using the proposed In-Domain GAN inversion with a fixed GAN generator.*
 
+> **In-Domain GAN Inversion for Real Image Editing** <br>
+> Jiapeng Zhu*, Yujun Shen*, Deli Zhao, Bolei Zhou <br>
+> *European Conference on Computer Vision (ECCV) 2020*
+
 In the repository, we propose an in-domain GAN inversion method, which not only faithfully reconstructs the input image but also ensures the inverted code to be **semantically meaningful** for editing. Basically, the in-domain GAN inversion contains two steps:
 
 1. Training **domain-guided** encoder.
@@ -106,7 +110,7 @@ Modify `train_encoder.py` as follows:
 python train_encoder.py
 ```
 
-## Bibtex
+## BibTeX
 
 ```bibtex
 @inproceedings{zhu2020indomain,
