@@ -321,7 +321,6 @@ def Encoder(
             dlatent_size     = 512,    # Disentangled latent (W) dimensionality.
             s0               = 4,      # Base number to decide how many residual block in encoder.
             **kwargs):
-    print('v10: ', kwargs)
     num_blocks = int(np.log2(size / s0))
 
     Input_img.set_shape([None, 3, size, size])
