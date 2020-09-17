@@ -36,7 +36,7 @@ def main():
 
     desc = 'stylegan-encoder'
     desc += '-%dgpu' % (args.num_gpus)
-    desc += '%dx%d' % (args.image_size, args.image_size)
+    desc += '-%dx%d' % (args.image_size, args.image_size)
     desc += '-%s' % (args.dataset_name)
 
     train.mirror_augment = args.mirror_augment
