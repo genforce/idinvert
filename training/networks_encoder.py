@@ -311,7 +311,7 @@ def residual_block3(inputs, fin, fout, is_training, num_dev, scope):
 
 
 def Encoder(
-            input_img,                 # Input image: [Minibatch, Channel, Height, Width].
+            Input_img,                 # Input image: [Minibatch, Channel, Height, Width].
             size             = 256,    # Input image size.
             filter           = 64,     # Minimum number of feature maps in any layer.
             filter_max       = 512,    # Maximum number of feature maps in any layer.
@@ -324,9 +324,9 @@ def Encoder(
     print('v10: ', kwargs)
     num_blocks = int(np.log2(size / s0))
 
-    input_img.set_shape([None, 3, size, size])
+    Input_img.set_shape([None, 3, size, size])
     with tf.variable_scope('FromImg'):
-        net = apply_bias(conv2d(input_img, fmaps=filter, kernel=5))
+        net = apply_bias(conv2d(Input_img, fmaps=filter, kernel=5))
         net = leaky_relu(net)
         net = sync_batch_norm(net, is_training=is_training, num_dev=num_gpus)
 
