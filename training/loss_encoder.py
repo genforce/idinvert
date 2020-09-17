@@ -1,6 +1,4 @@
 """Loss functions for training encoder."""
-
-import numpy as np
 import tensorflow as tf
 from dnnlib.tflib.autosummary import autosummary
 
