@@ -70,7 +70,7 @@ def test(E, Gs, real_test, submit_config):
         for gpu in range(submit_config.num_gpus):
             with tf.device("/gpu:%d" % gpu):
                 in_gpu = in_split[gpu]
-                latent_w = E.get_output_for(in_gpu, phase=False)
+                latent_w = E.get_output_for(in_gpu, is_training=False)
                 latent_wp = tf.reshape(latent_w, [in_gpu.shape[0], num_layers, latent_dim])
                 fake_X_val = Gs.components.synthesis.get_output_for(latent_wp, randomize_noise=False)
                 out_split.append(fake_X_val)
@@ -93,17 +93,19 @@ def training_loop(
                   dataset_args            = EasyDict(),
                   decoder_pkl             = EasyDict(),
                   drange_data             = [0, 255],
-                  drange_net              = [-1,1],   # Dynamic range used when feeding image data to the networks.
+                  drange_net              = [-1,1],    # Dynamic range used when feeding image data to the networks.
                   mirror_augment          = False,
-                  resume_run_id           = None,     # Run ID or network pkl to resume training from, None = start from scratch.
-                  resume_snapshot         = None,     # Snapshot index to resume training from, None = autodetect.
-                  image_snapshot_ticks    = 1,        # How often to export image snapshots?
-                  network_snapshot_ticks  = 5,       # How often to export network snapshots?
+                  filter                  = 64,        # Minimum number of feature maps in any layer.
+                  filter_max              = 512,       # Maximum number of feature maps in any layer.
+                  resume_run_id           = None,      # Run ID or network pkl to resume training from, None = start from scratch.
+                  resume_snapshot         = None,      # Snapshot index to resume training from, None = autodetect.
+                  image_snapshot_ticks    = 1,         # How often to export image snapshots?
+                  network_snapshot_ticks  = 10,         # How often to export network snapshots?
                   max_iters               = 150000):
 
     tflib.init_tf(tf_config)
 
-    with tf.name_scope('input'):
+    with tf.name_scope('Input'):
         real_train = tf.placeholder(tf.float32, [submit_config.batch_size, 3, submit_config.image_size, submit_config.image_size], name='real_image_train')
         real_test = tf.placeholder(tf.float32, [submit_config.batch_size_test, 3, submit_config.image_size, submit_config.image_size], name='real_image_test')
         real_split = tf.split(real_train, num_or_size_splits=submit_config.num_gpus, axis=0)
@@ -119,7 +121,8 @@ def training_loop(
             print('Constructing networks...')
             G, D, Gs = misc.load_pkl(decoder_pkl.decoder_pkl)
             num_layers = Gs.components.synthesis.input_shape[1]
-            E = tflib.Network('E', size=submit_config.image_size, filter=64, filter_max=1024, num_layers=num_layers, phase=True, **Encoder_args)
+            E = tflib.Network('E_gpu0', size=submit_config.image_size, filter=filter, filter_max=filter_max,
+                              num_layers=num_layers, is_training=True, num_gpus=submit_config.num_gpus, **Encoder_args)
             start = 0
 
     E.print_layers(); Gs.print_layers(); D.print_layers()
@@ -138,9 +141,9 @@ def training_loop(
     D_loss_fake = 0.
     D_loss_grad = 0.
     for gpu in range(submit_config.num_gpus):
-        print('build graph on gpu %s' % str(gpu))
+        print('Building Graph on GPU %s' % str(gpu))
         with tf.name_scope('GPU%d' % gpu), tf.device('/gpu:%d' % gpu):
-            E_gpu = E if gpu == 0 else E.clone(E.name + '_shadow')
+            E_gpu = E if gpu == 0 else E.clone(E.name[:-1] + str(gpu))
             D_gpu = D if gpu == 0 else D.clone(D.name + '_shadow')
             G_gpu = Gs if gpu == 0 else Gs.clone(Gs.name + '_shadow')
             perceptual_model = PerceptualModel(img_size=[E_loss_args.perceptual_img_size, E_loss_args.perceptual_img_size], multi_layers=False)
@@ -167,7 +170,7 @@ def training_loop(
     E_train_op = E_opt.apply_updates()
     D_train_op = D_opt.apply_updates()
 
-    print('building testing graph...')
+    print('Building testing graph...')
     fake_X_val = test(E, Gs, real_test, submit_config)
 
     sess = tf.get_default_session()
@@ -187,9 +190,9 @@ def training_loop(
     for it in range(start, max_iters):
 
         batch_images = sess.run(image_batch_train)
-        feed_dict_1 = {real_train: batch_images}
-        _, recon_, adv_ = sess.run([E_train_op, E_loss_rec, E_loss_adv], feed_dict_1)
-        _, d_r_, d_f_, d_g_ = sess.run([D_train_op, D_loss_real, D_loss_fake, D_loss_grad], feed_dict_1)
+        feed_dict = {real_train: batch_images}
+        _, recon_, adv_ = sess.run([E_train_op, E_loss_rec, E_loss_adv], feed_dict)
+        _, d_r_, d_f_, d_g_ = sess.run([D_train_op, D_loss_real, D_loss_fake, D_loss_grad], feed_dict)
 
         cur_nimg += submit_config.batch_size
 
@@ -206,8 +209,8 @@ def training_loop(
             if cur_tick % image_snapshot_ticks == 0:
                 batch_images_test = sess.run(image_batch_test)
                 batch_images_test = misc.adjust_dynamic_range(batch_images_test.astype(np.float32), [0, 255], [-1., 1.])
-                samples2 = sess.run(fake_X_val, feed_dict={real_test: batch_images_test})
-                orin_recon = np.concatenate([batch_images_test, samples2], axis=0)
+                recon = sess.run(fake_X_val, feed_dict={real_test: batch_images_test})
+                orin_recon = np.concatenate([batch_images_test, recon], axis=0)
                 orin_recon = adjust_pixel_range(orin_recon)
                 orin_recon = fuse_images(orin_recon, row=2, col=submit_config.batch_size_test)
                 # save image results during training, first row is original images and the second row is reconstructed images
