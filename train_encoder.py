@@ -22,7 +22,6 @@ def main():
                         help='Mirror augment (default: True)')
     args = parser.parse_args()
 
-    desc            = 'stylegan-encoder'
     train           = EasyDict(run_func_name='training.training_loop_encoder.training_loop')
     Encoder         = EasyDict(func_name='training.networks_encoder.Encoder')
     E_opt           = EasyDict(beta1=0.9, beta2=0.99, epsilon=1e-8)
@@ -35,6 +34,7 @@ def main():
     tf_config       = {'rnd.np_random_seed': 1000}
     submit_config   = dnnlib.SubmitConfig()
 
+    desc = 'stylegan-encoder'
     desc += '-%dgpu' % (args.num_gpus)
     desc += '%dx%d' % (args.image_size)
     desc += '-%s' % (args.dataset_name)
