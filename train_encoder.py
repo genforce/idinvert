@@ -29,14 +29,14 @@ def main():
     E_loss          = EasyDict(func_name='training.loss_encoder.E_loss', feature_scale=0.00005, D_scale=0.08, perceptual_img_size=256)
     D_loss          = EasyDict(func_name='training.loss_encoder.D_logistic_simplegp', r1_gamma=10.0)
     lr              = EasyDict(learning_rate=0.0001, decay_step=30000, decay_rate=0.8, stair=False)
-    Data_dir        = EasyDict(data_train='', data_test='')
-    Decoder_pkl     = EasyDict(decoder_pkl='')
+    Data_dir        = EasyDict(data_train=args.training_data, data_test=args.test_data)
+    Decoder_pkl     = EasyDict(decoder_pkl=args.decoder_pkl)
     tf_config       = {'rnd.np_random_seed': 1000}
     submit_config   = dnnlib.SubmitConfig()
 
     desc = 'stylegan-encoder'
     desc += '-%dgpu' % (args.num_gpus)
-    desc += '%dx%d' % (args.image_size)
+    desc += '%dx%d' % (args.image_size, args.image_size)
     desc += '-%s' % (args.dataset_name)
 
     train.mirror_augment = args.mirror_augment
