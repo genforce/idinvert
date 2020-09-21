@@ -107,7 +107,7 @@ def main():
   x_rec_mask = (tf.transpose(x_rec, [0, 2, 3, 1]) + 1) * mask - 1
   x_rec_mask_255 = (x_rec_mask + 1) / 2 * 255
 
-  w_enc = E.get_output_for(x, phase=False)
+  w_enc = E.get_output_for(x, is_training=False)
   wp_enc = tf.reshape(w_enc, latent_shape)
   setter = tf.assign(wp, wp_enc)
 

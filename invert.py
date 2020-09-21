@@ -97,7 +97,7 @@ def main():
     setter = tf.assign(wp, wp_rnd)
   else:
     logger.info(f'  Use encoder output as the initialization for optimization.')
-    w_enc = E.get_output_for(x, phase=False)
+    w_enc = E.get_output_for(x, is_training=False)
     wp_enc = tf.reshape(w_enc, latent_shape)
     setter = tf.assign(wp, wp_enc)
 
@@ -110,7 +110,7 @@ def main():
   loss_pix = tf.reduce_mean(tf.square(x - x_rec), axis=[1, 2, 3])
   if args.domain_regularizer:
     logger.info(f'  Involve encoder for optimization.')
-    w_enc_new = E.get_output_for(x_rec, phase=False)
+    w_enc_new = E.get_output_for(x_rec, is_training=False)
     wp_enc_new = tf.reshape(w_enc_new, latent_shape)
     loss_enc = tf.reduce_mean(tf.square(wp - wp_enc_new), axis=[1, 2])
   else:
