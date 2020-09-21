@@ -31,9 +31,9 @@ Please download the pre-trained models from the following links. For each model,
 
 | Path | Description
 | :--- | :----------
-|[face_256x256](https://drive.google.com/open?id=1MTeDchdtcvTWWQAtYvFHKIJLiuvtq49k)    | In-domain GAN trained with [FFHQ](https://github.com/NVlabs/ffhq-dataset) dataset.
-|[tower_256x256](https://drive.google.com/open?id=1breGEmOke7si3RS6BtrrX4NGbCc8Nq-g)   | In-domain GAN trained with [LSUN Tower](https://github.com/fyu/lsun) dataset.
-|[bedroom_256x256](https://drive.google.com/open?id=1vvJc6ASbjNdh-VUcpACmSgDMxd6QlQCJ) | In-domain GAN trained with [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
+|[face_256x256](https://drive.google.com/file/d/13sCLAduVQA1CxnFMpfBVsogAiZzW3edI/view?usp=sharing)    | In-domain GAN trained with [FFHQ](https://github.com/NVlabs/ffhq-dataset) dataset.
+|[tower_256x256](https://drive.google.com/file/d/1USfaSLor5d71IRoC8CWTbKJagS0-MJEv/view?usp=sharing)   | In-domain GAN trained with [LSUN Tower](https://github.com/fyu/lsun) dataset.
+|[bedroom_256x256](https://drive.google.com/file/d/1nRa4WAE1qF_j1CtH32hxjREK0o-rpucD/view?usp=sharing) | In-domain GAN trained with [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
 
 ### Inversion
 
@@ -99,17 +99,13 @@ The GAN model used in this work is [StyleGAN](https://github.com/NVlabs/stylegan
 python train.py
 ```
 
-### Step-2: Prepare data for encoder training
-
-Modify `train_encoder.py` as follows:
-
-- Add training and test dataset path to `Data_dir` in `train_encoder.py`.
-- Add generator path to `Decoder_pkl` in `train_encoder.py`.
-
-### Step-3: Train your own encoder
-
+### Step-2: Train your own encoder
+After the step-1, Prepare training and testing data for encoder training, and then run
 ```bash
-python train_encoder.py
+TRAINING_DATA=PATH_TO_TRAINING_DATA
+TESTING_DATA=PATH_TO_TESTING_DATA
+DECODER_PKL=PATH_TO_GENERATOR
+python train_encoder.py $TRAINING_DATA $TESTING_DATA $DECODER_PKL
 ```
 
 ## BibTeX
