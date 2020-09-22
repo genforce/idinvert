@@ -100,8 +100,9 @@ python train.py
 ```
 
 ### Step-2: Train your own encoder
-After the step-1, Prepare training and testing data for encoder training, and then run
 ```bash
+# Before training the encoder, please first prepare the training 
+# and the testing data, which are both .tfrecords files.
 TRAINING_DATA=PATH_TO_TRAINING_DATA
 TESTING_DATA=PATH_TO_TESTING_DATA
 DECODER_PKL=PATH_TO_GENERATOR
