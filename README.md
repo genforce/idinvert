@@ -31,7 +31,7 @@ Please download the pre-trained models from the following links. For each model,
 
 | Path | Description
 | :--- | :----------
-|[face_256x256](https://drive.google.com/file/d/13sCLAduVQA1CxnFMpfBVsogAiZzW3edI/view?usp=sharing)    | In-domain GAN trained with [FFHQ](https://github.com/NVlabs/ffhq-dataset) dataset.
+|[face_256x256](https://drive.google.com/file/d/1azAzSZg6VfNydjWr4qfl8Z4LfxktTPqM/view?usp=sharing)    | In-domain GAN trained with [FFHQ](https://github.com/NVlabs/ffhq-dataset) dataset.
 |[tower_256x256](https://drive.google.com/file/d/1USfaSLor5d71IRoC8CWTbKJagS0-MJEv/view?usp=sharing)   | In-domain GAN trained with [LSUN Tower](https://github.com/fyu/lsun) dataset.
 |[bedroom_256x256](https://drive.google.com/file/d/1nRa4WAE1qF_j1CtH32hxjREK0o-rpucD/view?usp=sharing) | In-domain GAN trained with [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
 
