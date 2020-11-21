@@ -101,14 +101,15 @@ python train.py
 ```
 
 ### Step-2: Train your own encoder
+
 ```bash
-# Before training the encoder, please first prepare the training 
-# and the testing data, which are both .tfrecords files.
 TRAINING_DATA=PATH_TO_TRAINING_DATA
 TESTING_DATA=PATH_TO_TESTING_DATA
 DECODER_PKL=PATH_TO_GENERATOR
 python train_encoder.py $TRAINING_DATA $TESTING_DATA $DECODER_PKL
 ```
+
+Note that the file `dataset_tool.py`, which is borrowed from the [StyleGAN](https://github.com/NVlabs/stylegan) repo, is used to prepared a directory of data from all resolutions. The training of the encoder does not rely on the progressive strategy, therefore, the training data and the test data should be both specified as the `.tfrecords` file with the highest resolution.
 
 ## BibTeX
 
